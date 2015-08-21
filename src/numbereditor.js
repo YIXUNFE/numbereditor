@@ -237,7 +237,7 @@
     var that = this,
         cfg = this.cfg,
         remote = cfg.remote.apply(this)
-    
+    if (this.getPostStatus()) {return}
     this.setPostStatus(true)
     $.ajax(remote).then(function (d) {
       cfg.onChange.call(that, d)
