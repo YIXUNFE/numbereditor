@@ -98,6 +98,27 @@
             toggle()
           </script>
           
+          <h3>异步请求(remote配置)</h3>
+          <input class="ipt" id="editor7" value="100" />
+          <script>
+            var editor7 = new NumberEditor('#editor7', {
+              remote: function () {
+                return {
+                  url: 'remote.json',
+                  type: 'GET',
+                  dataType: 'json'
+                }
+              },
+              onChange: function (d) {
+                this.check(d.number)
+              }
+            })
+          </script>
+          <style>
+          .number-loading {display: none}
+          .number-loading.loading {display: block}
+          </style>
+          
         </section>
 
         <aside id="sidebar">
