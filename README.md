@@ -101,7 +101,7 @@ remote: function () {
 onChange: function (data) {...}
 ```
 
-请求结束后，会调用`onChange`的值，并给与请求得到的数据作为参数。
+请求结束后，会调用`onChange`的值，并将请求得到的数据作为参数传递给。
 
 **Zepto的ajax默认没有promise方法，需要添加callback和deferred模块**
 
