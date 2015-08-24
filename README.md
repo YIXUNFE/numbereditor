@@ -57,6 +57,52 @@ setPostStatus() | - | 获取对象的异步请求状态
 
 ## remote配置详解
 
-待续
+在数字加减的过程中，我们可能需要询问服务器修改是否成功（比如库存状态）。`remote`配置可以解决此类问题。
 
+#### 配置项值为`function`
 
+为什么选用function类型作为配置项？这主要是为了方便获取NumberEditor对象的当前值，比如
+
+```javascript
+remote: function () {
+  var v = this.value
+  return {
+    url: '/id/' + v
+    ...
+  }
+}
+```
+
+this关键字在remote配置的`function`中指向NumberEditor对象自身。
+
+#### 返回值为jQuery/Zepto的ajax配置
+
+```javascript
+remote: function () {
+  return {
+    url: '...',
+    dataType: 'json',
+    type: 'POST',
+    data: ...
+  }
+}
+```
+
+返回的配置中不需要填写`success`和`error`，因为NumberEditor会使用promise方式处理异步请求，即在`onChange`配置中处理。
+
+```javascript
+remote: function () {
+  return {
+    ...
+  }
+},
+onChange: function (data) {...}
+```
+
+请求结束后，会调用`onChange`的值，并给与请求得到的数据作为参数。
+
+**Zepto的ajax默认没有promise方法，需要添加callback和deferred模块**
+
+-------------------
+
+<br />
