@@ -53,13 +53,15 @@ destroy() | - | 销毁对象
 enable() | - | 启用插件
 disable() | - | 禁用插件
 getPostStatus() | - | 获取对象是否在异步请求中
-setPostStatus() | - | 获取对象的异步请求状态
+setPostStatus() | - | 设置对象的异步请求状态
+
+<br />
 
 ## remote配置详解
 
 在数字加减的过程中，我们可能需要询问服务器修改是否成功（比如库存状态）。`remote`配置可以解决此类问题。
 
-#### 配置项值为`function`
+#### 配置项的值为`function`
 
 为什么选用function类型作为配置项？这主要是为了方便获取NumberEditor对象的当前值，比如
 
@@ -102,6 +104,12 @@ onChange: function (data) {...}
 请求结束后，会调用`onChange`的值，并给与请求得到的数据作为参数。
 
 **Zepto的ajax默认没有promise方法，需要添加callback和deferred模块**
+
+#### 其他
+
+- 配置remote后，生成的DOM中会多一个loading元素；
+- `setPostStatus`方法可以手动设置对象是否在异步请求状态；
+- `onChange`配置可以理解为有`remote`配置则在请求完成后执行，没有则立即执行
 
 -------------------
 
